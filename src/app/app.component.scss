@@ -1,0 +1,41 @@
+.main-container {
+  display: flex;
+  .table-container {
+    background-color: gainsboro;
+    width: 100%;
+    height: calc(100vh - 60px);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding-bottom: 80px;
+    padding-top: 40px;
+    table {
+      width: 87%;
+      height: 50vh;
+      tr.mat-row,
+      tr.mat-footer-row {
+        height: 30px;
+      }
+      button {
+        width: 30px;
+        height: 30px;
+        border: none;
+        border-radius: 7px;
+      }
+      button:hover {
+        cursor: pointer;
+      }
+      .edit {
+        background-color: rgb(149, 224, 114);
+      }
+      .delete {
+        background-color: rgb(245, 130, 130);
+      }
+    }
+    mat-paginator {
+      width: 87%;
+    }
+  }
+}

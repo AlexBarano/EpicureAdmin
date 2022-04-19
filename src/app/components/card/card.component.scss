@@ -1,0 +1,15 @@
+.container {
+  margin-bottom: 40px;
+  background-color: rgb(241, 181, 128);
+  max-width: 300px;
+  min-width: 100px;
+  width: 50vw;
+  height: 150px;
+  border-radius: 7px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px;
+}
