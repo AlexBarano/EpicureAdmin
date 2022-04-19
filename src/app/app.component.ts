@@ -19,13 +19,13 @@ export class AppComponent implements OnInit, AfterViewInit {
   chefsColumnsToDisplay: string[] = ['name', 'isChefOfTheWeek', 'edit'];
   restaurantsColumnsToDisplay: string[] = ['name', 'chef', 'edit'];
   dishesColumnsToDisplay: string[] = ['name', 'restaurant', 'edit'];
-  dataToDisplay: any[] = [];
-  dataSource = new MatTableDataSource<{}>(this.dataToDisplay);
+  dataSource = new MatTableDataSource<any>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+
   constructor(private displayService: DisplayService) {
     this.displayService.getDisplay().subscribe((data: any) => {
-      this.dataToDisplay = data;
+      this.dataSource.data = data;
     });
   }
   ngOnInit(): void {}
