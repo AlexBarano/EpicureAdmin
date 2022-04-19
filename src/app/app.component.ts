@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { DisplayService } from './services/display.service';
 
 @Component({
   selector: 'app-root',
@@ -15,23 +16,18 @@ import { MatTableDataSource } from '@angular/material/table';
   encapsulation: ViewEncapsulation.None,
 })
 export class AppComponent implements OnInit, AfterViewInit {
-  chefsColumnsToDisplay: string[] = ['name', 'isChefOfTheWeek'];
+  chefsColumnsToDisplay: string[] = ['name', 'isChefOfTheWeek', 'edit'];
   restaurantsColumnsToDisplay: string[] = ['name', 'chef', 'edit'];
-  dishesColumnsToDisplay: string[] = ['name', 'restaurant'];
-  exampleArr: any[] = [
-    { name: 'alex', chef: 'baranov', edit: '123' },
-    { name: 'alex', chef: 'baranov', edit: '123' },
-    { name: 'alex', chef: 'baranov', edit: '123' },
-    { name: 'ania', chef: 'lipkin', edit: '123' },
-    { name: 'ania', chef: 'lipkin', edit: '123' },
-    { name: 'ania', chef: 'lipkin', edit: '123' },
-    { name: 'ania', chef: 'lipkin', edit: '123' },
-  ];
-  dataSource = new MatTableDataSource<{ name: string; surname: string }>(
-    this.exampleArr
-  );
+  dishesColumnsToDisplay: string[] = ['name', 'restaurant', 'edit'];
+  dataToDisplay: any[] = [];
+  dataSource = new MatTableDataSource<{}>(this.dataToDisplay);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  constructor(private displayService: DisplayService) {
+    this.displayService.getDisplay().subscribe((data: any) => {
+      this.dataToDisplay = data;
+    });
+  }
   ngOnInit(): void {}
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
