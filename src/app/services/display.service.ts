@@ -35,7 +35,7 @@ export class DisplayService {
     this.type.next('chef');
     this.loading.next(false);
   }
-  displayRestaurants() {
+  async displayRestaurants() {
     this.loading.next(true);
 
     const restaurants: RestaurantDisplay[] =
@@ -45,7 +45,7 @@ export class DisplayService {
     this.type.next('restaurant');
     this.loading.next(false);
   }
-  displayDishes() {
+  async displayDishes() {
     this.loading.next(true);
     const dishes: DishDisplay[] = this.dishService.getDishes();
     this.display.next(dishes);
