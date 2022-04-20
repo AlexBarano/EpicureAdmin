@@ -31,7 +31,6 @@ export class DisplayService {
   async displayChefs() {
     this.loading.next(true);
     const chefs: { chefs: ChefDisplay[] } = await this.chefService.getChefs();
-    console.log(chefs);
     this.display.next(chefs.chefs);
     this.columns.next(chefColumns);
     this.type.next('chef');
@@ -39,7 +38,8 @@ export class DisplayService {
   }
   async displayRestaurants() {
     this.loading.next(true);
-    const restaurants: any = await this.restaurantService.getRestaurants();
+    const restaurants: { restaurants: RestaurantDisplay[] } =
+      await this.restaurantService.getRestaurants();
     this.display.next(restaurants.restaurants);
     this.columns.next(restaurantColumns);
     this.type.next('restaurant');
@@ -47,7 +47,8 @@ export class DisplayService {
   }
   async displayDishes() {
     this.loading.next(true);
-    const dishes: any = await this.dishService.getDishes();
+    const dishes: { dishes: DishDisplay[] } =
+      await this.dishService.getDishes();
     this.display.next(dishes.dishes);
     this.columns.next(dishColumns);
     this.type.next('dish');

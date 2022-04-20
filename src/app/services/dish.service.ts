@@ -8,8 +8,8 @@ export class DishService {
   loading: boolean = false;
   constructor(private http: HttpClient) {}
 
-  getDishes(): Promise<any> {
-    const dishes = firstValueFrom(
+  getDishes(): Promise<{ dishes: DishDisplay[] }> {
+    const dishes = firstValueFrom<{ dishes: DishDisplay[] }>(
       this.http.get<any>('http://localhost:3500/api/v1/dishes')
     );
     return dishes;

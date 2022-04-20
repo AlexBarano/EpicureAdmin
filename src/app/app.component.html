@@ -7,6 +7,7 @@
   </div>
   <div class="table-container">
     <app-card></app-card>
+    <button (click)="openDialog({})">add</button>
     <table
       mat-table
       [dataSource]="dataSource"
@@ -40,7 +41,7 @@
         <th mat-header-cell *matHeaderCellDef>Edit</th>
         <td mat-cell *matCellDef="let row">
           <div class="edit-buttons">
-            <button>
+            <button (click)="openDialog(row)">
               <mat-icon color="primary">edit</mat-icon>
             </button>
             <button>

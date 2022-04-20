@@ -1,0 +1,81 @@
+<h3 mat-dialog-title>Edit {{ dialogType }}</h3>
+<div class="container" mat-dialog-content [ngSwitch]="dialogType">
+  <div class="chef" *ngSwitchCase="'chef'">
+    <form [formGroup]="options">
+      <mat-form-field appearance="fill">
+        <mat-label>Chef Name</mat-label>
+        <input matInput [formControlName]="'name'" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Chef's Image</mat-label>
+        <input matInput formControlName="image" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Chef's Description</mat-label>
+        <textarea matInput formControlName="description"></textarea>
+      </mat-form-field>
+      <!-- <mat-checkbox [formControl]="isChefOfTheWeek"
+        >Chef of the Week?</mat-checkbox
+      > -->
+    </form>
+  </div>
+  <div class="restaurant" *ngSwitchCase="'restaurant'">
+    <form [formGroup]="options">
+      <mat-form-field appearance="fill">
+        <mat-label>Restaurant Name</mat-label>
+        <input matInput formControlName="name" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Restaurant's Image</mat-label>
+        <input matInput formControlName="image" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Signature Dish</mat-label>
+        <mat-select>
+          <mat-option>-- None --</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Chef</mat-label>
+        <mat-select>
+          <mat-option>-- None --</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <!-- <mat-checkbox [formControl]="isChefOfTheWeek">Is Popular?</mat-checkbox> -->
+    </form>
+  </div>
+  <div class="dish" *ngSwitchCase="'dish'">
+    <form [formGroup]="options">
+      <mat-form-field appearance="fill">
+        <mat-label>Dish Name</mat-label>
+        <input matInput formControlName="name" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Dish's Image</mat-label>
+        <input matInput formControlName="image" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Price</mat-label>
+        <input matInput formControlName="price" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Ingredients</mat-label>
+        <input matInput formControlName="ingredients" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Tags</mat-label>
+        <input matInput formControlName="tags" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Belongs to Restaurant</mat-label>
+        <mat-select>
+          <mat-option>-- None --</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button (click)="onSaveClick()">Save</button>
+</div>

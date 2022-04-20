@@ -7,8 +7,8 @@ import { firstValueFrom } from 'rxjs';
 export class RestaurantService {
   constructor(private http: HttpClient) {}
 
-  getRestaurants(): Promise<any> {
-    const restaurants = firstValueFrom(
+  getRestaurants(): Promise<{ restaurants: RestaurantDisplay[] }> {
+    const restaurants = firstValueFrom<{ restaurants: RestaurantDisplay[] }>(
       this.http.get<any>('http://localhost:3500/api/v1/restaurants')
     );
     return restaurants;

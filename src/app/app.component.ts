@@ -1,4 +1,3 @@
-import { TOUCH_BUFFER_MS } from '@angular/cdk/a11y/input-modality/input-modality-detector';
 import {
   Component,
   ViewChild,
@@ -7,9 +6,11 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatDialog } from '@angular/material/dialog';
+
 import { MatTableDataSource } from '@angular/material/table';
-import { Observable } from 'rxjs';
 import { DisplayService } from './services/display.service';
+import { DialogComponent } from './components/dialog/dialog.component';
 
 @Component({
   selector: 'app-root',
@@ -25,7 +26,10 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private displayService: DisplayService) {
+  constructor(
+    private displayService: DisplayService,
+    public dialog: MatDialog
+  ) {
     this.displayService.getDisplay().subscribe((data: any) => {
       this.dataSource.data = data;
     });
@@ -39,10 +43,22 @@ export class AppComponent implements OnInit, AfterViewInit {
       this.isLoading = loading;
     });
   }
+
   ngOnInit(): void {
     this.displayService.displayChefs();
   }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+  }
+
+  openDialog(dataSend: any): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '800px',
+      data: dataSend,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed ', result);
+    });
   }
 }
