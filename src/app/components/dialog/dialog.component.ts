@@ -39,14 +39,13 @@ export class DialogComponent implements OnInit {
       isChefOfTheWeek:
         'isChefOfTheWeek' in data ? data.isChefOfTheWeek : '' || '',
       price: 'price' in data ? data.price : '' || '',
-      ingredients: 'ingredients' in data ? data.ingredients : '' || '',
-      tags: 'tags' in data ? data.tags : '' || '',
+      ingredients: 'ingredients' in data ? [data.ingredients] : '' || '',
+      tags: 'tags' in data ? [data.tags] : '' || '',
       restaurant: 'restaurant' in data ? data.restaurant : '' || '',
       chef: 'chef' in data ? data.chef : '' || '',
       isPopular: 'isPopular' in data ? data.isPopular : '' || '',
       signatureDish: 'signatureDish' in data ? data.signatureDish : '' || '',
     });
-    console.log(this.options.value);
   }
 
   ngOnInit(): void {}
