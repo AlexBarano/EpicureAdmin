@@ -14,6 +14,6 @@ export class RestaurantService {
     return restaurants;
   }
   deleteRestaurant() {}
-  updateRestaurant() {}
-  createNewRestaurant() {}
+  updateRestaurant(restaurant: RestaurantDisplay) {}
+  createNewRestaurant(restaurant: RestaurantDisplay) {}
 }

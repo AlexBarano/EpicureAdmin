@@ -6,6 +6,9 @@ import { DisplayService } from 'src/app/services/display.service';
 import { ChefDisplay } from 'src/app/models/chef.model';
 import { RestaurantDisplay } from 'src/app/models/restaurant.model';
 import { DishDisplay } from 'src/app/models/dish.model';
+import { ChefService } from 'src/app/services/chef.service';
+import { DishService } from 'src/app/services/dish.service';
+import { RestaurantService } from 'src/app/services/restaurant.service';
 
 @Component({
   selector: 'app-dialog',
@@ -22,7 +25,10 @@ export class DialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA)
     public data: ChefDisplay | RestaurantDisplay | DishDisplay,
     private displayService: DisplayService,
-    fb: FormBuilder
+    fb: FormBuilder,
+    private chefService: ChefService,
+    private dishService: DishService,
+    private restaurantService: RestaurantService
   ) {
     this.displayService.getTypeOfDisplay().subscribe((type: string) => {
       this.dialogType = type;
@@ -74,17 +80,23 @@ export class DialogComponent implements OnInit {
     switch (this.dialogType) {
       case 'chef':
         if (this.options.value._id === null) {
+          this.chefService.createNewChef(this.options.value);
         } else {
+          this.chefService.updateChef(this.options.value);
         }
         break;
       case 'dish':
         if (this.options.value._id === null) {
+          this.dishService.createNewDish(this.options.value);
         } else {
+          this.dishService.updateDish(this.options.value);
         }
         break;
       case 'restaurant':
         if (this.options.value._id === null) {
+          this.restaurantService.createNewRestaurant(this.options.value);
         } else {
+          this.restaurantService.updateRestaurant(this.options.value);
         }
         break;
     }

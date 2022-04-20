@@ -15,6 +15,6 @@ export class DishService {
     return dishes;
   }
   deleteDish() {}
-  updateDish() {}
-  createNewDish() {}
+  updateDish(dish: DishDisplay) {}
+  createNewDish(dish: DishDisplay) {}
 }

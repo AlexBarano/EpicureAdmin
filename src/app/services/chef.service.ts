@@ -14,6 +14,6 @@ export class ChefService {
     return chefs;
   }
   deleteChef() {}
-  updateChef() {}
-  createNewChef() {}
+  updateChef(chef: ChefDisplay) {}
+  createNewChef(chef: ChefDisplay) {}
 }
