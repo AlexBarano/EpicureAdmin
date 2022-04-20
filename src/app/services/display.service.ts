@@ -13,10 +13,13 @@ const restaurantColumns: string[] = ['name', 'signatureDish', 'chef', 'edit'];
 
 @Injectable({ providedIn: 'root' })
 export class DisplayService {
-  private display: BehaviorSubject<any> = new BehaviorSubject<any>('');
+  private display: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   private type: BehaviorSubject<string> = new BehaviorSubject<string>('chef');
   private columns: BehaviorSubject<string[]> = new BehaviorSubject<string[]>(
     chefColumns
+  );
+  private loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+    false
   );
   constructor(
     private chefService: ChefService,
@@ -24,24 +27,31 @@ export class DisplayService {
     private dishService: DishService
   ) {}
 
-  displayChefs() {
-    const chefs: ChefDisplay[] = this.chefService.getChefs();
+  async displayChefs() {
+    this.loading.next(true);
+    const chefs: ChefDisplay[] = await this.chefService.getChefs();
     this.display.next(chefs);
     this.columns.next(chefColumns);
     this.type.next('chef');
+    this.loading.next(false);
   }
   displayRestaurants() {
+    this.loading.next(true);
+
     const restaurants: RestaurantDisplay[] =
       this.restaurantService.getRestaurants();
     this.display.next(restaurants);
     this.columns.next(restaurantColumns);
     this.type.next('restaurant');
+    this.loading.next(false);
   }
   displayDishes() {
+    this.loading.next(true);
     const dishes: DishDisplay[] = this.dishService.getDishes();
     this.display.next(dishes);
     this.columns.next(dishColumns);
     this.type.next('dish');
+    this.loading.next(false);
   }
   getDisplay() {
     return this.display.asObservable();
@@ -51,5 +61,8 @@ export class DisplayService {
   }
   getColumnsToDisplay() {
     return this.columns.asObservable();
+  }
+  getLoading() {
+    return this.loading.asObservable();
   }
 }

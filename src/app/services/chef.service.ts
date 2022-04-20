@@ -5,7 +5,9 @@ import { ChefDisplay } from '../models/chef.model';
 export class ChefService {
   constructor() {}
 
-  getChefs(): ChefDisplay[] {
+  delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
+
+  async getChefs(): Promise<ChefDisplay[]> {
     const arr: ChefDisplay[] = [];
     const chef: ChefDisplay = {
       name: 'chef',
@@ -25,6 +27,7 @@ export class ChefService {
     arr.push(chef);
     arr.push(chef);
     arr.push(chef);
+    await this.delay(1000);
     return arr;
   }
   deleteChef() {}

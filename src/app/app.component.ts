@@ -1,3 +1,4 @@
+import { TOUCH_BUFFER_MS } from '@angular/cdk/a11y/input-modality/input-modality-detector';
 import {
   Component,
   ViewChild,
@@ -19,6 +20,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   columnsToDisplay: string[] = [];
   typeOfContentToDisplay: string = '';
   dataSource = new MatTableDataSource<any>();
+  isLoading: boolean = false;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -32,8 +34,13 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.displayService.getColumnsToDisplay().subscribe((data: string[]) => {
       this.columnsToDisplay = data;
     });
+    this.displayService.getLoading().subscribe((loading: boolean) => {
+      this.isLoading = loading;
+    });
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.displayService.displayChefs();
+  }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
