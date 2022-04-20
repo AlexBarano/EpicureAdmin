@@ -16,9 +16,8 @@ import { DisplayService } from './services/display.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class AppComponent implements OnInit, AfterViewInit {
-  chefsColumnsToDisplay: string[] = ['name', 'isChefOfTheWeek', 'edit'];
-  restaurantsColumnsToDisplay: string[] = ['name', 'chef', 'edit'];
-  dishesColumnsToDisplay: string[] = ['name', 'restaurant', 'edit'];
+  columnsToDisplay: string[] = [];
+  typeOfContentToDisplay: string = '';
   dataSource = new MatTableDataSource<any>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -26,6 +25,12 @@ export class AppComponent implements OnInit, AfterViewInit {
   constructor(private displayService: DisplayService) {
     this.displayService.getDisplay().subscribe((data: any) => {
       this.dataSource.data = data;
+    });
+    this.displayService.getTypeOfDisplay().subscribe((data: any) => {
+      this.typeOfContentToDisplay = data;
+    });
+    this.displayService.getColumnsToDisplay().subscribe((data: string[]) => {
+      this.columnsToDisplay = data;
     });
   }
   ngOnInit(): void {}

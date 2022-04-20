@@ -4,14 +4,33 @@
 
   <div class="table-container">
     <app-card></app-card>
-    <table mat-table [dataSource]="dataSource">
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      [ngSwitch]="typeOfContentToDisplay"
+    >
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef>Name</th>
-        <td mat-cell *matCellDef="let person">{{ person.name }}</td>
+        <td mat-cell *matCellDef="let item">{{ item.name }}</td>
       </ng-container>
-      <ng-container matColumnDef="chef">
-        <th mat-header-cell *matHeaderCellDef>Surname</th>
-        <td mat-cell *matCellDef="let person">{{ person.chef }}</td>
+
+      <ng-container *ngSwitchCase="'chef'" matColumnDef="isChefOfTheWeek">
+        <th mat-header-cell *matHeaderCellDef>Chef Of The Week?</th>
+        <td mat-cell *matCellDef="let chef">{{ chef.isChefOfTheWeek }}</td>
+      </ng-container>
+      <ng-container *ngSwitchCase="'dish'" matColumnDef="restaurant">
+        <th mat-header-cell *matHeaderCellDef>Restaurant</th>
+        <td mat-cell *matCellDef="let dish">{{ dish.restaurant }}</td>
+      </ng-container>
+      <ng-container *ngSwitchCase="'restaurant'" matColumnDef="chef">
+        <th mat-header-cell *matHeaderCellDef>Chef</th>
+        <td mat-cell *matCellDef="let restaurant">{{ restaurant.chef }}</td>
+      </ng-container>
+      <ng-container *ngSwitchCase="'restaurant'" matColumnDef="signatureDish">
+        <th mat-header-cell *matHeaderCellDef>Signature Dish</th>
+        <td mat-cell *matCellDef="let restaurant">
+          {{ restaurant.siganatureDish }}
+        </td>
       </ng-container>
       <ng-container matColumnDef="edit">
         <th mat-header-cell *matHeaderCellDef>Edit</th>
@@ -20,11 +39,8 @@
           <button class="delete" mat-button>Delete</button>
         </td>
       </ng-container>
-      <tr mat-header-row *matHeaderRowDef="restaurantsColumnsToDisplay"></tr>
-      <tr
-        mat-row
-        *matRowDef="let myRowData; columns: restaurantsColumnsToDisplay"
-      ></tr>
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+      <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
     </table>
     <mat-paginator
       [pageSizeOptions]="[5, 10]"

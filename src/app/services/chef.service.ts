@@ -14,6 +14,17 @@ export class ChefService {
       isChefOfTheWeek: true,
     };
     arr.push(chef);
+    arr.push(chef);
+    arr.push(chef);
+    arr.push(chef);
+    arr.push(chef);
+    arr.push(chef);
+    arr.push(chef);
+    arr.push(chef);
+    arr.push(chef);
+    arr.push(chef);
+    arr.push(chef);
+    arr.push(chef);
     return arr;
   }
   deleteChef() {}
