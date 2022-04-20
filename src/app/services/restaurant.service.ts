@@ -1,21 +1,16 @@
 import { Injectable } from '@angular/core';
 import { RestaurantDisplay } from '../models/restaurant.model';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class RestaurantService {
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
-  getRestaurants(): RestaurantDisplay[] {
-    const arr: RestaurantDisplay[] = [];
-    const res: RestaurantDisplay = {
-      name: 'res',
-      signatureDish: 'sig dish',
-      image: 'image',
-      isPopular: true,
-      chef: 'Chef',
-    };
-    arr.push(res);
-    return arr;
+  getRestaurants(): any {
+    const restaurants = this.http.get<any>(
+      'http://localhost:3500/api/v1/restaurants'
+    );
+    return restaurants;
   }
   deleteRestaurant() {}
   updateRestaurant() {}

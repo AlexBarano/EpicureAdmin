@@ -1,22 +1,14 @@
 import { Injectable } from '@angular/core';
 import { DishDisplay } from '../models/dish.model';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class DishService {
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
-  getDishes(): DishDisplay[] {
-    const arr: DishDisplay[] = [];
-    const dish: DishDisplay = {
-      name: 'dish',
-      restaurant: 'res1',
-      image: 'image',
-      price: 420,
-      ingredients: 'stuff',
-      tags: ['tag1'],
-    };
-    arr.push(dish);
-    return arr;
+  getDishes(): any {
+    const dishes = this.http.get<any>('http://localhost:3500/api/v1/dishes');
+    return dishes;
   }
   deleteDish() {}
   updateDish() {}

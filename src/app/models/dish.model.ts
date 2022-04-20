@@ -5,4 +5,5 @@ export interface DishDisplay {
   price: number;
   ingredients: string;
   tags: string[];
+  id: string;
 }

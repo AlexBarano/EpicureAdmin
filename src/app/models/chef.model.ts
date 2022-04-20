@@ -3,4 +3,5 @@ export interface ChefDisplay {
   isChefOfTheWeek: boolean;
   image: string;
   description: string;
+  _id: string;
 }
