@@ -4,5 +4,5 @@ export interface RestaurantDisplay {
   signatureDish: string;
   image: string;
   isPopular: boolean;
-  id: string;
+  _id: string;
 }
