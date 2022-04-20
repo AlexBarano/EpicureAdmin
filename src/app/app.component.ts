@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { Observable } from 'rxjs';
 import { DisplayService } from './services/display.service';
 
 @Component({

@@ -21,40 +21,36 @@ export class DisplayService {
   private loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
     false
   );
+
   constructor(
     private chefService: ChefService,
     private restaurantService: RestaurantService,
     private dishService: DishService
   ) {}
 
-  displayChefs() {
+  async displayChefs() {
     this.loading.next(true);
-    this.chefService.getChefs().subscribe((data: any) => {
-      const chefs: ChefDisplay[] = data.chefs;
-      this.display.next(chefs);
-      this.columns.next(chefColumns);
-      this.type.next('chef');
-    });
+    const chefs: { chefs: ChefDisplay[] } = await this.chefService.getChefs();
+    console.log(chefs);
+    this.display.next(chefs.chefs);
+    this.columns.next(chefColumns);
+    this.type.next('chef');
     this.loading.next(false);
   }
-  displayRestaurants() {
+  async displayRestaurants() {
     this.loading.next(true);
-    this.restaurantService.getRestaurants().subscribe((data: any) => {
-      const restaurants: RestaurantDisplay[] = data.restaurants;
-      this.display.next(restaurants);
-      this.columns.next(restaurantColumns);
-      this.type.next('restaurant');
-    });
+    const restaurants: any = await this.restaurantService.getRestaurants();
+    this.display.next(restaurants.restaurants);
+    this.columns.next(restaurantColumns);
+    this.type.next('restaurant');
     this.loading.next(false);
   }
   async displayDishes() {
     this.loading.next(true);
-    this.dishService.getDishes().subscribe((data: any) => {
-      const dishes: DishDisplay[] = data.dishes;
-      this.display.next(dishes);
-      this.columns.next(dishColumns);
-      this.type.next('dish');
-    });
+    const dishes: any = await this.dishService.getDishes();
+    this.display.next(dishes.dishes);
+    this.columns.next(dishColumns);
+    this.type.next('dish');
     this.loading.next(false);
   }
   getDisplay() {
