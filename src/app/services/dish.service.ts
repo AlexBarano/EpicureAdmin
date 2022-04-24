@@ -5,7 +5,6 @@ import { firstValueFrom } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class DishService {
-  loading: boolean = false;
   constructor(private http: HttpClient) {}
 
   getDishes(): Promise<{ dishes: DishDisplay[] }> {
@@ -14,7 +13,28 @@ export class DishService {
     );
     return dishes;
   }
-  deleteDish() {}
-  updateDish(dish: DishDisplay) {}
-  createNewDish(dish: DishDisplay) {}
+  deleteDish(dish: DishDisplay): Promise<void> {
+    const dishStatus = firstValueFrom(
+      this.http.delete<any>(`http://localhost:3500/api/v1/dishes/${dish._id}`)
+    );
+    return dishStatus;
+  }
+  updateDish(dish: DishDisplay): Promise<void> {
+    const dishStatus = firstValueFrom(
+      this.http.patch<any>(
+        `http://localhost:3500/api/v1/dishes/${dish._id}`,
+        dish
+      )
+    );
+    return dishStatus;
+  }
+  createNewDish(dish: DishDisplay): Promise<void> {
+    const dishStatus = firstValueFrom(
+      this.http.post<any>(
+        `http://localhost:3500/api/v1/dishes/${dish._id}`,
+        dish
+      )
+    );
+    return dishStatus;
+  }
 }

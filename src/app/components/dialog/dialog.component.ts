@@ -73,17 +73,16 @@ export class DialogComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
-  onSaveClick(): void {
-    console.log(this.options.value);
-
-    // switch case on type then check of we update or create
+  async onSaveClick(): Promise<void> {
+    // switch case on type then check if we update or create
     switch (this.dialogType) {
       case 'chef':
         if (this.options.value._id === null) {
-          this.chefService.createNewChef(this.options.value);
+          await this.chefService.createNewChef(this.options.value);
         } else {
-          this.chefService.updateChef(this.options.value);
+          await this.chefService.updateChef(this.options.value);
         }
+        await this.displayService.displayChefs();
         break;
       case 'dish':
         if (this.options.value._id === null) {
@@ -91,6 +90,7 @@ export class DialogComponent implements OnInit {
         } else {
           this.dishService.updateDish(this.options.value);
         }
+        await this.displayService.displayDishes();
         break;
       case 'restaurant':
         if (this.options.value._id === null) {
@@ -98,6 +98,7 @@ export class DialogComponent implements OnInit {
         } else {
           this.restaurantService.updateRestaurant(this.options.value);
         }
+        await this.displayService.displayRestaurants();
         break;
     }
 

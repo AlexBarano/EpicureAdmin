@@ -13,7 +13,30 @@ export class RestaurantService {
     );
     return restaurants;
   }
-  deleteRestaurant() {}
-  updateRestaurant(restaurant: RestaurantDisplay) {}
-  createNewRestaurant(restaurant: RestaurantDisplay) {}
+  deleteRestaurant(restaurant: RestaurantDisplay): Promise<void> {
+    const restaurantStatus = firstValueFrom(
+      this.http.delete<any>(
+        `http://localhost:3500/api/v1/restaurants/${restaurant._id}`
+      )
+    );
+    return restaurantStatus;
+  }
+  updateRestaurant(restaurant: RestaurantDisplay): Promise<void> {
+    const restaurantStatus = firstValueFrom(
+      this.http.patch<any>(
+        `http://localhost:3500/api/v1/restaurants/${restaurant._id}`,
+        restaurant
+      )
+    );
+    return restaurantStatus;
+  }
+  createNewRestaurant(restaurant: RestaurantDisplay): Promise<void> {
+    const restaurantStatus = firstValueFrom(
+      this.http.post<any>(
+        `http://localhost:3500/api/v1/restaurants/${restaurant._id}`,
+        restaurant
+      )
+    );
+    return restaurantStatus;
+  }
 }

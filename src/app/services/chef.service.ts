@@ -13,7 +13,25 @@ export class ChefService {
     );
     return chefs;
   }
-  deleteChef() {}
-  updateChef(chef: ChefDisplay) {}
-  createNewChef(chef: ChefDisplay) {}
+  deleteChef(chef: ChefDisplay): Promise<any> {
+    const chefStatus = firstValueFrom(
+      this.http.delete<any>(`http://localhost:3500/api/v1/chefs/${chef._id}`)
+    );
+    return chefStatus;
+  }
+  updateChef(chef: ChefDisplay): Promise<any> {
+    const chefStatus = firstValueFrom(
+      this.http.patch<any>(
+        `http://localhost:3500/api/v1/chefs/${chef._id}`,
+        chef
+      )
+    );
+    return chefStatus;
+  }
+  createNewChef(chef: ChefDisplay): Promise<any> {
+    const chefStatus = firstValueFrom(
+      this.http.post<any>(`http://localhost:3500/api/v1/chefs`, chef)
+    );
+    return chefStatus;
+  }
 }
