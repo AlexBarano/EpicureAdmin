@@ -18,7 +18,7 @@ export class DishService {
   ): Promise<{ dishes: DishDisplay[] }> {
     const dishes = firstValueFrom<{ dishes: DishDisplay[] }>(
       this.http.get<any>(
-        `http://localhost:3500/api/v1/dishes/restaurant${restaurantId}`
+        `http://localhost:3500/api/v1/dishes/restaurant/${restaurantId}`
       )
     );
     return dishes;
@@ -30,11 +30,13 @@ export class DishService {
     return dishStatus;
   }
   updateDish(dish: DishDisplay): Promise<void> {
+    const ingredients: string[] = dish.ingredients;
+    const ing: string[] = ingredients[0].split(',');
     const dishStatus = firstValueFrom(
-      this.http.patch<any>(
-        `http://localhost:3500/api/v1/dishes/${dish._id}`,
-        dish
-      )
+      this.http.patch<any>(`http://localhost:3500/api/v1/dishes/${dish._id}`, {
+        ...dish,
+        ingredients: ing,
+      })
     );
     return dishStatus;
   }

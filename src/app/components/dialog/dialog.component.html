@@ -32,15 +32,15 @@
       <mat-form-field appearance="fill">
         <mat-label>Signature Dish</mat-label>
         <mat-select formControlName="signatureDish">
-          <mat-option *ngFor="let sigDish of sigDishes">{{
-            sigDish.name
+          <mat-option [value]="dish._id" *ngFor="let dish of resDishes">{{
+            dish.name
           }}</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Chef</mat-label>
         <mat-select formControlName="chef">
-          <mat-option [value]="chef.name" *ngFor="let chef of chefRes">{{
+          <mat-option [value]="chef._id" *ngFor="let chef of chefs">{{
             chef.name
           }}</mat-option>
         </mat-select>

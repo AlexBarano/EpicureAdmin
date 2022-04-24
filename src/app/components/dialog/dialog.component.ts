@@ -18,8 +18,8 @@ import { RestaurantService } from 'src/app/services/restaurant.service';
 export class DialogComponent implements OnInit {
   dialogType!: string;
   options!: FormGroup;
-  sigDishes!: DishDisplay[];
-  chefRes!: ChefDisplay[];
+  resDishes!: DishDisplay[];
+  chefs!: ChefDisplay[];
   restaurants!: RestaurantDisplay[];
 
   constructor(
@@ -75,7 +75,12 @@ export class DialogComponent implements OnInit {
     switch (this.dialogType) {
       case 'restaurant':
         const chefs = await this.chefService.getChefs();
-        this.chefRes = chefs.chefs;
+        this.chefs = chefs.chefs;
+        const restaurantId = this.options.value._id;
+        const restaurantDishes = await this.dishService.getDishesOfRestaurant(
+          restaurantId
+        );
+        this.resDishes = restaurantDishes.dishes;
         break;
       case 'dish':
         const restaurants = await this.restaurantService.getRestaurants();
@@ -88,8 +93,6 @@ export class DialogComponent implements OnInit {
   }
   async onSaveClick(): Promise<void> {
     // switch case on type then check if we update or create
-    console.log(this.options.value);
-
     switch (this.dialogType) {
       case 'chef':
         if (this.options.value._id === null) {
