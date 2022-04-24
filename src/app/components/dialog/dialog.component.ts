@@ -18,7 +18,6 @@ import { RestaurantService } from 'src/app/services/restaurant.service';
 export class DialogComponent implements OnInit {
   dialogType!: string;
   options!: FormGroup;
-  isChefOfTheWeek = new FormControl();
   sigDishes!: DishDisplay[];
   chefRes!: ChefDisplay[];
   restaurants!: RestaurantDisplay[];
@@ -89,6 +88,7 @@ export class DialogComponent implements OnInit {
   }
   async onSaveClick(): Promise<void> {
     // switch case on type then check if we update or create
+    console.log(this.options.value);
 
     switch (this.dialogType) {
       case 'chef':

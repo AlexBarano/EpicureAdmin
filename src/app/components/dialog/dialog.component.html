@@ -14,9 +14,9 @@
         <mat-label>Chef's Description</mat-label>
         <textarea matInput formControlName="description"></textarea>
       </mat-form-field>
-      <!-- <mat-checkbox [formControl]="isChefOfTheWeek"
+      <mat-checkbox formControlName="isChefOfTheWeek"
         >Chef of the Week?</mat-checkbox
-      > -->
+      >
     </form>
   </div>
   <div class="restaurant" *ngSwitchCase="'restaurant'">
@@ -45,7 +45,7 @@
           }}</mat-option>
         </mat-select>
       </mat-form-field>
-      <!-- <mat-checkbox [formControl]="isChefOfTheWeek">Is Popular?</mat-checkbox> -->
+      <mat-checkbox formControlName="isPopular">Is Popular?</mat-checkbox>
     </form>
   </div>
   <div class="dish" *ngSwitchCase="'dish'">
@@ -68,7 +68,7 @@
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Tags</mat-label>
-        <mat-select>
+        <mat-select formControlName="tags">
           <mat-option>-- None --</mat-option>
           <mat-option value="vegan">Vegan</mat-option>
           <mat-option value="spicy">Spicy</mat-option>
