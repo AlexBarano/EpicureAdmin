@@ -81,6 +81,8 @@ export class DialogComponent implements OnInit {
           restaurantId
         );
         this.resDishes = restaurantDishes.dishes;
+        console.log(this.chefs);
+        console.log(this.resDishes);
         break;
       case 'dish':
         const restaurants = await this.restaurantService.getRestaurants();
