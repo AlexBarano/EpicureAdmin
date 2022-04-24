@@ -41,8 +41,13 @@ export class DishService {
     return dishStatus;
   }
   createNewDish(dish: DishDisplay): Promise<void> {
+    const ingredients: string[] = dish.ingredients;
+    const ing: string[] = ingredients[0].split(',');
     const dishStatus = firstValueFrom(
-      this.http.post<any>(`http://localhost:3500/api/v1/dishes/`, dish)
+      this.http.post<any>(`http://localhost:3500/api/v1/dishes/`, {
+        ...dish,
+        ingredients: ing,
+      })
     );
     return dishStatus;
   }

@@ -1,17 +1,13 @@
 .container {
-  margin-bottom: 40px;
   background-color: rgb(241, 181, 128);
-  max-width: 400px;
+  max-width: 40vw;
   min-width: 100px;
   width: 70vw;
-  height: 120px;
+  height: 100px;
   border-radius: 7px;
-  text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  gap: 15px;
   h4 {
     font-size: 30px;
   }

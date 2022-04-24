@@ -77,12 +77,12 @@ export class DialogComponent implements OnInit {
         const chefs = await this.chefService.getChefs();
         this.chefs = chefs.chefs;
         const restaurantId = this.options.value._id;
-        const restaurantDishes = await this.dishService.getDishesOfRestaurant(
-          restaurantId
-        );
-        this.resDishes = restaurantDishes.dishes;
-        console.log(this.chefs);
-        console.log(this.resDishes);
+        if (restaurantId) {
+          const restaurantDishes = await this.dishService.getDishesOfRestaurant(
+            restaurantId
+          );
+          this.resDishes = restaurantDishes.dishes;
+        }
         break;
       case 'dish':
         const restaurants = await this.restaurantService.getRestaurants();

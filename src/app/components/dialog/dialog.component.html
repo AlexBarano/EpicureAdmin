@@ -40,7 +40,7 @@
       <mat-form-field appearance="fill">
         <mat-label>Chef</mat-label>
         <mat-select formControlName="chef">
-          <mat-option [value]="chef._id" *ngFor="let chef of chefs">{{
+          <mat-option *ngFor="let chef of chefs" [value]="chef._id">{{
             chef.name
           }}</mat-option>
         </mat-select>
