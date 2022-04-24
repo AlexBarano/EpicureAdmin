@@ -18,3 +18,16 @@
     }
   }
 }
+
+.btn-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 100px;
+  .action-btn {
+    background-color: transparent;
+    border: none;
+  }
+  button:hover {
+    cursor: pointer;
+  }
+}

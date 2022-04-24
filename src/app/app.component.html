@@ -7,7 +7,11 @@
   </div>
   <div class="table-container">
     <app-card></app-card>
-    <button (click)="openDialog({})">add</button>
+    <div class="btn-container">
+      <button class="add-btn" (click)="openDialog({})">
+        <mat-icon> add </mat-icon>
+      </button>
+    </div>
     <table
       mat-table
       [dataSource]="dataSource"

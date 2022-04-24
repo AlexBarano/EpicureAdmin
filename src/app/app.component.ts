@@ -76,7 +76,6 @@ export class AppComponent implements OnInit, AfterViewInit {
       case 'restaurant':
         await this.restaurantService.deleteRestaurant(row);
         await this.displayService.displayRestaurants();
-
         break;
       case 'dish':
         await this.dishService.deleteDish(row);

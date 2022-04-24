@@ -13,6 +13,16 @@ export class DishService {
     );
     return dishes;
   }
+  getDishesOfRestaurant(
+    restaurantId: string
+  ): Promise<{ dishes: DishDisplay[] }> {
+    const dishes = firstValueFrom<{ dishes: DishDisplay[] }>(
+      this.http.get<any>(
+        `http://localhost:3500/api/v1/dishes/restaurant${restaurantId}`
+      )
+    );
+    return dishes;
+  }
   deleteDish(dish: DishDisplay): Promise<void> {
     const dishStatus = firstValueFrom(
       this.http.delete<any>(`http://localhost:3500/api/v1/dishes/${dish._id}`)
@@ -30,10 +40,7 @@ export class DishService {
   }
   createNewDish(dish: DishDisplay): Promise<void> {
     const dishStatus = firstValueFrom(
-      this.http.post<any>(
-        `http://localhost:3500/api/v1/dishes/${dish._id}`,
-        dish
-      )
+      this.http.post<any>(`http://localhost:3500/api/v1/dishes/`, dish)
     );
     return dishStatus;
   }

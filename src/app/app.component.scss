@@ -21,6 +21,18 @@
     justify-content: flex-end;
     padding-bottom: 80px;
     padding-top: 40px;
+    .btn-container {
+      width: 87%;
+      display: flex;
+      justify-content: flex-end;
+      .add-btn {
+        background-color: white;
+        border: none;
+      }
+      button:hover {
+        cursor: pointer;
+      }
+    }
     table {
       width: 87%;
       height: 50vh;

@@ -31,14 +31,18 @@
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Signature Dish</mat-label>
-        <mat-select>
-          <mat-option>-- None --</mat-option>
+        <mat-select formControlName="signatureDish">
+          <mat-option *ngFor="let sigDish of sigDishes">{{
+            sigDish.name
+          }}</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Chef</mat-label>
-        <mat-select>
-          <mat-option>-- None --</mat-option>
+        <mat-select formControlName="chef">
+          <mat-option [value]="chef.name" *ngFor="let chef of chefRes">{{
+            chef.name
+          }}</mat-option>
         </mat-select>
       </mat-form-field>
       <!-- <mat-checkbox [formControl]="isChefOfTheWeek">Is Popular?</mat-checkbox> -->
@@ -66,18 +70,26 @@
         <mat-label>Tags</mat-label>
         <mat-select>
           <mat-option>-- None --</mat-option>
+          <mat-option value="vegan">Vegan</mat-option>
+          <mat-option value="spicy">Spicy</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Belongs to Restaurant</mat-label>
-        <mat-select>
-          <mat-option>-- None --</mat-option>
+        <mat-select formControlName="restaurant">
+          <mat-option [value]="res._id" *ngFor="let res of restaurants">{{
+            res.name
+          }}</mat-option>
         </mat-select>
       </mat-form-field>
     </form>
   </div>
 </div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button (click)="onSaveClick()">Save</button>
+<div mat-dialog-actions class="btn-container">
+  <button class="action-btn" mat-button (click)="onNoClick()">
+    <mat-icon>cancel</mat-icon>
+  </button>
+  <button class="action-btn" mat-button (click)="onSaveClick()">
+    <mat-icon>save</mat-icon>
+  </button>
 </div>

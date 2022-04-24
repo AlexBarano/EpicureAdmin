@@ -33,7 +33,7 @@ export class RestaurantService {
   createNewRestaurant(restaurant: RestaurantDisplay): Promise<void> {
     const restaurantStatus = firstValueFrom(
       this.http.post<any>(
-        `http://localhost:3500/api/v1/restaurants/${restaurant._id}`,
+        `http://localhost:3500/api/v1/restaurants`,
         restaurant
       )
     );
