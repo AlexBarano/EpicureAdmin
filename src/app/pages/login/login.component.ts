@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -12,13 +13,19 @@ export class LoginComponent implements OnInit {
     email: new FormControl(''),
     password: new FormControl(''),
   });
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthService) {}
   ngOnInit(): void {}
-  onSubmit() {
+  async onSubmit() {
     if (this.form.valid) {
-      // check if can create the user
-      // validate here everything
-      this.router.navigate(['admin']);
+      const { email, password } = this.form.value;
+      try {
+        const response = await this.authService.login(email, password);
+        const token = response.accessToken;
+        AuthService.setToken(token);
+        this.router.navigate(['admin']);
+      } catch (error) {
+        console.log(error);
+      }
     }
   }
   onRegister() {
