@@ -58,7 +58,7 @@ export class DialogComponent implements OnInit {
           image: data.image,
           price: 'price' in data ? data.price : null,
           ingredients: 'ingredients' in data ? [data.ingredients] : null,
-          tags: 'tags' in data ? [data.tags] : null,
+          tags: 'tags' in data ? data.tags : null,
           restaurant: 'restaurant' in data ? data.restaurant._id : null,
         });
         break;

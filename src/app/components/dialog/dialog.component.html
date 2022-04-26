@@ -51,6 +51,14 @@
   <div class="dish" *ngSwitchCase="'dish'">
     <form [formGroup]="options">
       <mat-form-field appearance="fill">
+        <mat-label>Belongs to Restaurant</mat-label>
+        <mat-select formControlName="restaurant">
+          <mat-option [value]="res._id" *ngFor="let res of restaurants">{{
+            res.name
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
         <mat-label>Dish Name</mat-label>
         <input matInput formControlName="name" />
       </mat-form-field>
@@ -69,17 +77,10 @@
       <mat-form-field appearance="fill">
         <mat-label>Tags</mat-label>
         <mat-select formControlName="tags">
-          <mat-option>-- None --</mat-option>
+          <mat-option value="">-- None --</mat-option>
           <mat-option value="vegan">Vegan</mat-option>
           <mat-option value="spicy">Spicy</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Belongs to Restaurant</mat-label>
-        <mat-select formControlName="restaurant">
-          <mat-option [value]="res._id" *ngFor="let res of restaurants">{{
-            res.name
-          }}</mat-option>
+          <mat-option value="spicy&vegan">Vegan & Spicy</mat-option>
         </mat-select>
       </mat-form-field>
     </form>
