@@ -11,6 +11,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,6 +21,9 @@ import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CardComponent } from './components/card/card.component';
 import { DialogComponent } from './components/dialog/dialog.component';
+import { LoginComponent } from './pages/login/login.component';
+import { AdminComponent } from './pages/admin/admin.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +32,9 @@ import { DialogComponent } from './components/dialog/dialog.component';
     SideBarComponent,
     CardComponent,
     DialogComponent,
+    LoginComponent,
+    AdminComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,6 +52,8 @@ import { DialogComponent } from './components/dialog/dialog.component';
     ReactiveFormsModule,
     MatSelectModule,
     MatCheckboxModule,
+    MatCardModule,
+    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

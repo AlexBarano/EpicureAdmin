@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { DisplayService } from 'src/app/services/display.service';
 import { ChefDisplay } from 'src/app/models/chef.model';
@@ -27,7 +27,7 @@ export class DialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA)
     public data: ChefDisplay | RestaurantDisplay | DishDisplay,
     private displayService: DisplayService,
-    fb: FormBuilder,
+    private fb: FormBuilder,
     private chefService: ChefService,
     private dishService: DishService,
     private restaurantService: RestaurantService
@@ -55,7 +55,7 @@ export class DialogComponent implements OnInit {
           price: 'price' in data ? data.price : null,
           ingredients: 'ingredients' in data ? [data.ingredients] : null,
           tags: 'tags' in data ? [data.tags] : null,
-          restaurant: 'restaurant' in data ? data.restaurant : null,
+          restaurant: 'restaurant' in data ? data.restaurant._id : null,
         });
         break;
       case 'restaurant':
@@ -63,7 +63,7 @@ export class DialogComponent implements OnInit {
           _id: data._id,
           name: data.name,
           image: data.image,
-          chef: 'chef' in data ? data.chef : null,
+          chef: 'chef' in data ? data.chef._id : null,
           isPopular: 'isPopular' in data ? data.isPopular : null,
           signatureDish: 'signatureDish' in data ? data.signatureDish : null,
         });
@@ -75,6 +75,8 @@ export class DialogComponent implements OnInit {
     switch (this.dialogType) {
       case 'restaurant':
         const chefs = await this.chefService.getChefs();
+        console.log(this.options.value);
+
         this.chefs = chefs.chefs;
         const restaurantId = this.options.value._id;
         if (restaurantId) {
@@ -95,6 +97,7 @@ export class DialogComponent implements OnInit {
   }
   async onSaveClick(): Promise<void> {
     // switch case on type then check if we update or create
+    this.dialogRef.close();
     switch (this.dialogType) {
       case 'chef':
         if (this.options.value._id === null) {
@@ -121,7 +124,5 @@ export class DialogComponent implements OnInit {
         await this.displayService.displayRestaurants();
         break;
     }
-
-    this.dialogRef.close();
   }
 }

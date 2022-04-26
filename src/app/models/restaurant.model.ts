@@ -1,6 +1,8 @@
+import { ChefDisplay } from './chef.model';
+
 export interface RestaurantDisplay {
   name: string;
-  chef: string;
+  chef: ChefDisplay;
   signatureDish: string;
   image: string;
   isPopular: boolean;
