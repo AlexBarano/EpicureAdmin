@@ -14,6 +14,8 @@ import { DialogComponent } from '../../components/dialog/dialog.component';
 import { ChefService } from '../../services/chef.service';
 import { RestaurantService } from '../../services/restaurant.service';
 import { DishService } from '../../services/dish.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -34,6 +36,8 @@ export class AdminComponent implements OnInit {
     private chefService: ChefService,
     private restaurantService: RestaurantService,
     private dishService: DishService,
+    private authService: AuthService,
+    private router: Router,
     public dialog: MatDialog
   ) {
     this.displayService.getDisplay().subscribe((data: any) => {
@@ -58,6 +62,11 @@ export class AdminComponent implements OnInit {
   }
 
   openDialog(dataSend: any): void {
+    if (!this.authService.isLoggedIn()) {
+      this.router.navigate(['login']);
+      alert('Login again please');
+      return;
+    }
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '800px',
       data: dataSend,
@@ -68,6 +77,12 @@ export class AdminComponent implements OnInit {
   }
   // add implementation
   async deleteRow(row: any): Promise<void> {
+    // check if user authenticated
+    if (!this.authService.isLoggedIn()) {
+      this.router.navigate(['login']);
+      alert('Login again please');
+      return;
+    }
     const deleteConfirm = confirm('Are you sure you want to delete the row?');
     if (deleteConfirm) {
       switch (this.typeOfContentToDisplay) {

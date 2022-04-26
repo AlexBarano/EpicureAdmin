@@ -12,6 +12,7 @@ import { AuthService } from './auth.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
+  constructor(private authService: AuthService) {}
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
@@ -20,7 +21,7 @@ export class AuthInterceptor implements HttpInterceptor {
       setHeaders: {
         'Content-Type': 'application/json; charset=utf-8',
         Accept: 'application/json',
-        Authorization: `Bearer ${AuthService.getToken()}`,
+        Authorization: `Bearer ${this.authService.isLoggedIn()}`,
       },
     });
     return next.handle(req);

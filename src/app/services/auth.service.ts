@@ -23,10 +23,25 @@ export class AuthService {
       })
     );
   }
-  static setToken(token: string) {
+  setToken(token: string): void {
     localStorage.setItem('token', token);
   }
-  static getToken() {
+  getToken(): string {
     return localStorage.getItem('token') as string;
+  }
+  // checks of the token is valid
+  isLoggedIn(): boolean {
+    const token: string | undefined =
+      (localStorage.getItem('token') as string) || undefined;
+    if (!token) {
+      return false;
+    }
+    const expiry = JSON.parse(atob(token.split('.')[1])).exp;
+    const isExpired = Math.floor(new Date().getTime() / 1000) >= expiry;
+    if (isExpired) {
+      localStorage.removeItem('token');
+      return false;
+    }
+    return true;
   }
 }

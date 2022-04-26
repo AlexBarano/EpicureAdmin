@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 @Component({
@@ -9,24 +9,29 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class RegisterComponent implements OnInit {
   form: FormGroup = new FormGroup({
-    firstEmail: new FormControl(''),
-    secondEmail: new FormControl(''),
-    firstPassword: new FormControl(''),
-    secondPassword: new FormControl(''),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(10),
+    ]),
   });
   constructor(private router: Router, private authService: AuthService) {}
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate(['admin']);
+    }
+  }
   async onSubmit() {
     if (this.form.valid) {
-      // check if can create the user
-      // this.authService.register(this.form.value);
-      const email = this.form.value.firstEmail;
-      const password = this.form.value.firstPassword;
+      const email = this.form.value.email;
+      const password = this.form.value.password;
       try {
         await this.authService.register(email, password);
         this.router.navigate(['login']);
-      } catch (error) {
+        alert('Created new user!');
+      } catch (error: any) {
         console.log(error);
+        alert(error.error.error.name);
       }
     }
   }
