@@ -29,7 +29,6 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['admin']);
       } catch (error: any) {
         alert(error.error.error.name);
-        console.log(error.error.error.name);
       }
     }
   }

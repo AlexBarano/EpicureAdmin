@@ -9,6 +9,8 @@ import { DishDisplay } from 'src/app/models/dish.model';
 import { ChefService } from 'src/app/services/chef.service';
 import { DishService } from 'src/app/services/dish.service';
 import { RestaurantService } from 'src/app/services/restaurant.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dialog',
@@ -30,7 +32,9 @@ export class DialogComponent implements OnInit {
     private fb: FormBuilder,
     private chefService: ChefService,
     private dishService: DishService,
-    private restaurantService: RestaurantService
+    private restaurantService: RestaurantService,
+    private authService: AuthService,
+    private router: Router
   ) {
     this.displayService.getTypeOfDisplay().subscribe((type: string) => {
       this.dialogType = type;
@@ -98,6 +102,11 @@ export class DialogComponent implements OnInit {
   async onSaveClick(): Promise<void> {
     // switch case on type then check if we update or create
     this.dialogRef.close();
+    if (!this.authService.isLoggedIn()) {
+      this.router.navigate(['login']);
+      alert('Please log in again to continue');
+      return;
+    }
     switch (this.dialogType) {
       case 'chef':
         if (this.options.value._id === null) {
