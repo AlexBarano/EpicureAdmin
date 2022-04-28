@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { RestaurantDisplay } from '../models/restaurant.model';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
+import { environment } from '../../environments/environment.prod';
 
 @Injectable({ providedIn: 'root' })
 export class RestaurantService {
@@ -9,22 +10,20 @@ export class RestaurantService {
 
   getRestaurants(): Promise<{ restaurants: RestaurantDisplay[] }> {
     const restaurants = firstValueFrom<{ restaurants: RestaurantDisplay[] }>(
-      this.http.get<any>('http://localhost:3500/api/v1/restaurants')
+      this.http.get<any>(`${environment.url}/restaurants`)
     );
     return restaurants;
   }
   deleteRestaurant(restaurant: RestaurantDisplay): Promise<void> {
     const restaurantStatus = firstValueFrom(
-      this.http.delete<any>(
-        `http://localhost:3500/api/v1/restaurants/${restaurant._id}`
-      )
+      this.http.delete<any>(`${environment.url}/restaurants/${restaurant._id}`)
     );
     return restaurantStatus;
   }
   updateRestaurant(restaurant: RestaurantDisplay): Promise<void> {
     const restaurantStatus = firstValueFrom(
       this.http.patch<any>(
-        `http://localhost:3500/api/v1/restaurants/${restaurant._id}`,
+        `${environment.url}/restaurants/${restaurant._id}`,
         restaurant
       )
     );
@@ -32,10 +31,7 @@ export class RestaurantService {
   }
   createNewRestaurant(restaurant: RestaurantDisplay): Promise<void> {
     const restaurantStatus = firstValueFrom(
-      this.http.post<any>(
-        `http://localhost:3500/api/v1/restaurants`,
-        restaurant
-      )
+      this.http.post<any>(`${environment.url}/restaurants`, restaurant)
     );
     return restaurantStatus;
   }
