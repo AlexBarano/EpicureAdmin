@@ -1,0 +1,96 @@
+<h3 mat-dialog-title>Edit {{ dialogType }}</h3>
+<div class="container" mat-dialog-content [ngSwitch]="dialogType">
+  <div class="chef" *ngSwitchCase="'chef'">
+    <form [formGroup]="options">
+      <mat-form-field appearance="fill">
+        <mat-label>Chef Name</mat-label>
+        <input matInput [formControlName]="'name'" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Chef's Image</mat-label>
+        <input matInput formControlName="image" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Chef's Description</mat-label>
+        <textarea matInput formControlName="description"></textarea>
+      </mat-form-field>
+      <mat-checkbox formControlName="isChefOfTheWeek"
+        >Chef of the Week?</mat-checkbox
+      >
+    </form>
+  </div>
+  <div class="restaurant" *ngSwitchCase="'restaurant'">
+    <form [formGroup]="options">
+      <mat-form-field appearance="fill">
+        <mat-label>Restaurant Name</mat-label>
+        <input matInput formControlName="name" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Restaurant's Image</mat-label>
+        <input matInput formControlName="image" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Signature Dish</mat-label>
+        <mat-select formControlName="signatureDish">
+          <mat-option [value]="dish._id" *ngFor="let dish of resDishes">{{
+            dish.name
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Chef</mat-label>
+        <mat-select formControlName="chef">
+          <mat-option *ngFor="let chef of chefs" [value]="chef._id">{{
+            chef.name
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-checkbox formControlName="isPopular">Is Popular?</mat-checkbox>
+    </form>
+  </div>
+  <div class="dish" *ngSwitchCase="'dish'">
+    <form [formGroup]="options">
+      <mat-form-field appearance="fill">
+        <mat-label>Belongs to Restaurant</mat-label>
+        <mat-select formControlName="restaurant">
+          <mat-option [value]="res._id" *ngFor="let res of restaurants">{{
+            res.name
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Dish Name</mat-label>
+        <input matInput formControlName="name" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Dish's Image</mat-label>
+        <input matInput formControlName="image" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Price</mat-label>
+        <input matInput formControlName="price" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Ingredients</mat-label>
+        <input matInput formControlName="ingredients" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Tags</mat-label>
+        <mat-select formControlName="tags">
+          <mat-option value="">-- None --</mat-option>
+          <mat-option value="vegan">Vegan</mat-option>
+          <mat-option value="spicy">Spicy</mat-option>
+          <mat-option value="spicy&vegan">Vegan & Spicy</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </div>
+</div>
+<div mat-dialog-actions class="btn-container">
+  <button class="action-btn" mat-button (click)="onNoClick()">
+    <mat-icon>cancel</mat-icon>
+  </button>
+  <button class="action-btn" mat-button (click)="onSaveClick()">
+    <mat-icon>save</mat-icon>
+  </button>
+</div>
