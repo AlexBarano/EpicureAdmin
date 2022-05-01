@@ -39,4 +39,11 @@ export class RegisterComponent implements OnInit {
     // no validation req here
     this.router.navigate(['login']);
   }
+  get email() {
+    return this.form.get('email');
+  }
+
+  get password() {
+    return this.form.get('password');
+  }
 }

@@ -18,6 +18,11 @@
           formControlName="password"
         />
       </mat-form-field>
+      <div class="form-alert" *ngIf="email?.invalid">Email is invalid.</div>
+      <div class="form-alert" *ngIf="password?.invalid">
+        Password is invalid.
+      </div>
+
       <div class="button">
         <button type="submit" mat-button>Login</button>
       </div>

@@ -29,8 +29,8 @@ export class DishService {
     return dishStatus;
   }
   updateDish(dish: DishDisplay): Promise<void> {
-    const ingredients: string[] = dish.ingredients;
-    const ing: string[] = ingredients[0].split(',');
+    const ingredients: string = dish.ingredients;
+    const ing: string[] = ingredients.split(',');
     const dishStatus = firstValueFrom(
       this.http.patch<any>(`${environment.url}/dishes/${dish._id}`, {
         ...dish,
@@ -40,8 +40,8 @@ export class DishService {
     return dishStatus;
   }
   createNewDish(dish: DishDisplay): Promise<void> {
-    const ingredients: string[] = dish.ingredients;
-    const ing: string[] = ingredients[0].split(',');
+    const ingredients: string = dish.ingredients;
+    const ing: string[] = ingredients.split(',');
     const dishStatus = firstValueFrom(
       this.http.post<any>(`${environment.url}/dishes/`, {
         ...dish,

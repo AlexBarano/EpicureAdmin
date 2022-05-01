@@ -35,4 +35,11 @@ export class LoginComponent implements OnInit {
   onRegister() {
     this.router.navigate(['register']);
   }
+  get email() {
+    return this.form.get('email');
+  }
+
+  get password() {
+    return this.form.get('password');
+  }
 }

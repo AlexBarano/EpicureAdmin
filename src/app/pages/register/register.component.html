@@ -18,6 +18,10 @@
           formControlName="password"
         />
       </mat-form-field>
+      <div class="form-alert" *ngIf="email?.invalid">Email is invalid.</div>
+      <div class="form-alert" *ngIf="password?.errors?.['minlength']">
+        Password must contain atleast 10 characters.
+      </div>
       <div class="button">
         <button type="submit" mat-button>Register</button>
       </div>
